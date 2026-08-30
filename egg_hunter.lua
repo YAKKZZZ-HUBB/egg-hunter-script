@@ -586,11 +586,11 @@ print("✅ BAGIAN 4/5 LOADED - Best Egg + Anti Hit")
 
 -- =========================================================
 -- 🥚 EGG HUNTER - FINAL
--- BAGIAN 5/5: GUI + MONITOR + INITIALIZATION
+-- BAGIAN 5/5: GUI KEREN + MONITOR + INIT
 -- =========================================================
 
 -- =========================================================
--- GUI
+-- HAPUS GUI LAMA
 -- =========================================================
 
 local oldGui = playerGui:FindFirstChild("EggHunter")
@@ -598,50 +598,120 @@ if oldGui then
     oldGui:Destroy()
 end
 
+-- =========================================================
+-- SCREENGUI
+-- =========================================================
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "EggHunter"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
+-- =========================================================
+-- MAIN FRAME
+-- =========================================================
+
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 280, 0, 330)
-frame.Position = UDim2.new(0.5, -140, 0.5, -165)
-frame.BackgroundColor3 = Color3.fromRGB(15, 15, 35)
+frame.Size = UDim2.new(0, 280, 0, 380)
+frame.Position = UDim2.new(0.02, 0, 0.15, 0)
+frame.BackgroundColor3 = Color3.fromRGB(10, 10, 30)
+frame.BackgroundTransparency = 0.08
 frame.BorderSizePixel = 0
 frame.Active = true
 frame.Draggable = true
 frame.Parent = screenGui
 
-Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 14)
 
-local stroke = Instance.new("UIStroke")
-stroke.Thickness = 1.5
-stroke.Transparency = 0.35
-stroke.Parent = frame
+local frameStroke = Instance.new("UIStroke")
+frameStroke.Color = Color3.fromRGB(255, 200, 80)
+frameStroke.Thickness = 1.5
+frameStroke.Transparency = 0.3
+frameStroke.Parent = frame
 
-local header = Instance.new("TextLabel")
-header.Size = UDim2.new(1, 0, 0, 38)
-header.Text = "🥚 EGG HUNTER"
-header.TextColor3 = Color3.fromRGB(255, 255, 255)
-header.Font = Enum.Font.GothamBold
-header.TextSize = 16
-header.BackgroundTransparency = 1
+-- =========================================================
+-- HEADER
+-- =========================================================
+
+local header = Instance.new("Frame")
+header.Size = UDim2.new(1, 0, 0, 44)
+header.BackgroundColor3 = Color3.fromRGB(255, 160, 40)
+header.BackgroundTransparency = 0.2
+header.BorderSizePixel = 0
 header.Parent = frame
 
+Instance.new("UICorner", header).CornerRadius = UDim.new(0, 14)
+
+local headerGradient = Instance.new("UIGradient")
+headerGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 180, 50)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 100, 50))
+})
+headerGradient.Parent = header
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -50, 1, 0)
+title.Position = UDim2.new(0, 15, 0, 0)
+title.Text = "🥚 EGG HUNTER"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.GothamBold
+title.TextSize = 18
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.BackgroundTransparency = 1
+title.Parent = header
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -38, 0, 7)
+closeBtn.BackgroundTransparency = 1
+closeBtn.Text = "✕"
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 18
+closeBtn.Parent = header
+
+closeBtn.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- =========================================================
+-- SPEED DISPLAY
+-- =========================================================
+
+local speedFrame = Instance.new("Frame")
+speedFrame.Size = UDim2.new(0.9, 0, 0, 45)
+speedFrame.Position = UDim2.new(0.05, 0, 0, 52)
+speedFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 50)
+speedFrame.BackgroundTransparency = 0.5
+speedFrame.BorderSizePixel = 0
+speedFrame.Parent = frame
+Instance.new("UICorner", speedFrame).CornerRadius = UDim.new(0, 8)
+
 local speedLabel = Instance.new("TextLabel")
-speedLabel.Size = UDim2.new(1, -30, 0, 25)
-speedLabel.Position = UDim2.new(0, 15, 0, 38)
+speedLabel.Size = UDim2.new(1, 0, 1, 0)
 speedLabel.Text = "⚡ Speed: 0"
 speedLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
 speedLabel.Font = Enum.Font.GothamBold
-speedLabel.TextSize = 13
-speedLabel.TextXAlignment = Enum.TextXAlignment.Left
+speedLabel.TextSize = 18
 speedLabel.BackgroundTransparency = 1
-speedLabel.Parent = frame
+speedLabel.Parent = speedFrame
+
+-- =========================================================
+-- LOG
+-- =========================================================
+
+local logFrame = Instance.new("Frame")
+logFrame.Size = UDim2.new(0.9, 0, 0, 30)
+logFrame.Position = UDim2.new(0.05, 0, 0, 105)
+logFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 40)
+logFrame.BackgroundTransparency = 0.3
+logFrame.BorderSizePixel = 0
+logFrame.Parent = frame
+Instance.new("UICorner", logFrame).CornerRadius = UDim.new(0, 6)
 
 local logLabel = Instance.new("TextLabel")
-logLabel.Size = UDim2.new(1, -30, 0, 30)
-logLabel.Position = UDim2.new(0, 15, 0, 65)
+logLabel.Size = UDim2.new(0.95, 0, 0.9, 0)
+logLabel.Position = UDim2.new(0.025, 0, 0.05, 0)
 logLabel.Text = "📌 Ready"
 logLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
 logLabel.Font = Enum.Font.Gotham
@@ -649,7 +719,7 @@ logLabel.TextSize = 11
 logLabel.TextXAlignment = Enum.TextXAlignment.Left
 logLabel.TextWrapped = true
 logLabel.BackgroundTransparency = 1
-logLabel.Parent = frame
+logLabel.Parent = logFrame
 
 updateLog = function(text)
     if logLabel and logLabel.Parent then
@@ -657,66 +727,66 @@ updateLog = function(text)
     end
 end
 
-local function createToggle(name, key, y, callback)
-    local button = Instance.new("TextButton")
-    button.Size = UDim2.new(1, -30, 0, 32)
-    button.Position = UDim2.new(0, 15, 0, y)
-    button.BackgroundColor3 = Color3.fromRGB(40, 40, 70)
-    button.TextColor3 = Color3.fromRGB(220, 220, 220)
-    button.Font = Enum.Font.GothamBold
-    button.TextSize = 11
-    button.Text = "❌ " .. name
-    button.Parent = frame
+-- =========================================================
+-- TOGGLE BUTTONS
+-- =========================================================
 
-    Instance.new("UICorner", button).CornerRadius = UDim.new(0, 7)
+local function createToggle(name, key, y, callback)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0.85, 0, 0, 30)
+    btn.Position = UDim2.new(0.075, 0, 0, y)
+    btn.BackgroundColor3 = Color3.fromRGB(35, 35, 60)
+    btn.TextColor3 = Color3.fromRGB(200, 200, 200)
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 12
+    btn.Text = "❌ " .. name
+    btn.BorderSizePixel = 0
+    btn.Parent = frame
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
 
     local enabled = false
 
-    button.MouseButton1Click:Connect(function()
+    btn.MouseButton1Click:Connect(function()
         enabled = not enabled
         Config[key] = enabled
 
         if enabled then
-            button.BackgroundColor3 = Color3.fromRGB(45, 180, 80)
-            button.Text = "✅ " .. name
+            btn.BackgroundColor3 = Color3.fromRGB(50, 180, 80)
+            btn.Text = "✅ " .. name
         else
-            button.BackgroundColor3 = Color3.fromRGB(40, 40, 70)
-            button.Text = "❌ " .. name
+            btn.BackgroundColor3 = Color3.fromRGB(35, 35, 60)
+            btn.Text = "❌ " .. name
         end
 
         updateLog(name .. " " .. (enabled and "ON" or "OFF"))
-
-        if callback then
-            callback(enabled)
-        end
+        if callback then callback(enabled) end
     end)
 end
 
-createToggle("🥚 Auto Steal", "AutoSteal", 100, function(enabled)
-    if enabled then startSteal() end
-end)
+createToggle("🥚 Auto Steal", "AutoSteal", 145, function(en) if en then startSteal() end end)
+createToggle("🏃 Treadmill", "AutoTreadmill", 180, function(en) if en then startTreadmill() end end)
+createToggle("🛡️ Anti Hit", "AntiHit", 215, function(en) if en then startAntiHit() end end)
+createToggle("⭐ Best Egg", "BestEgg", 250, function(en) if en then startBestEgg() end end)
+createToggle("🏠 Auto Return", "AutoReturn", 285)
 
-createToggle("🏃 Treadmill", "AutoTreadmill", 138, function(enabled)
-    if enabled then startTreadmill() end
-end)
+-- =========================================================
+-- FOOTER
+-- =========================================================
 
-createToggle("🛡️ Anti Hit", "AntiHit", 176, function(enabled)
-    if enabled then startAntiHit() end
-end)
-
-createToggle("⭐ Best Egg", "BestEgg", 214, function(enabled)
-    if enabled then startBestEgg() end
-end)
-
-createToggle("🏠 Auto Return", "AutoReturn", 252)
+local line = Instance.new("Frame")
+line.Size = UDim2.new(0.8, 0, 0, 1)
+line.Position = UDim2.new(0.1, 0, 0, 330)
+line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+line.BackgroundTransparency = 0.7
+line.Parent = frame
 
 local footer = Instance.new("TextLabel")
 footer.Size = UDim2.new(1, 0, 0, 20)
-footer.Position = UDim2.new(0, 0, 1, -24)
+footer.Position = UDim2.new(0, 0, 0, 340)
 footer.Text = "⚡ Speed Monitor Only"
 footer.TextColor3 = Color3.fromRGB(160, 160, 160)
 footer.Font = Enum.Font.Gotham
-footer.TextSize = 9
+footer.TextSize = 10
 footer.BackgroundTransparency = 1
 footer.Parent = frame
 
@@ -779,3 +849,7 @@ print("🏃 Treadmill = Berdiri di atas treadmill")
 print("🥚 Auto Steal = Prioritas rarity terbaik")
 print("🛡️ Anti Hit = Cegah terpental + reset state")
 print("========================================")
+
+print("✅ BAGIAN 5/5 LOADED - GUI + Monitor + Init")
+
+
